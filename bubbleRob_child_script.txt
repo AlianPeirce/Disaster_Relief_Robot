@@ -1,0 +1,100 @@
+function sysCall_init()
+    
+    -- This function is executed exactly once, the first time this script is executed
+    
+    -- THE FOLLOWING TWO LINES OF CODE WERE WRITTEN BY ME.
+    num_To_Detect = 0
+    noseSensor_To_Detect=sim.getObject("./sensingNoseForHuman") -- Handle of the human-sensing proximity sensor
+    
+    -- THIS LINE OF CODE WAS TAKEN FROM THE CODE SNIPPET IN THE COURSE RESOURCES.
+    noseSensor2=sim.getObject("./sensingNose2") -- Handle of the back proximity sensor
+    
+    bubbleRobBase=sim.getObject('.') -- this is bubbleRob's handle
+    leftMotor=sim.getObject("./leftMotor") -- Handle of the left motor
+    rightMotor=sim.getObject("./rightMotor") -- Handle of the right motor
+    noseSensor=sim.getObject("./sensingNose") -- Handle of the proximity sensor
+    minMaxSpeed={50*math.pi/180,300*math.pi/180} -- Min and max speeds for each motor
+    backUntilTime=-1 -- Tells whether bubbleRob is in forward or backward mode
+    robotCollection=sim.createCollection(0)
+    sim.addItemToCollection(robotCollection,sim.handle_tree,bubbleRobBase,0)
+    distanceSegment=sim.addDrawingObject(sim.drawing_lines,4,0,-1,1,{0,1,0})
+    robotTrace=sim.addDrawingObject(sim.drawing_linestrip+sim.drawing_cyclic,2,0,-1,200,{1,1,0},nil,nil,{1,1,0})
+    graph=sim.getObject('./graph')
+    distStream=sim.addGraphStream(graph,'bubbleRob clearance','m',0,{1,0,0})
+    -- Create the custom UI:
+    xml = '<ui title="'..sim.getObjectAlias(bubbleRobBase,1)..' speed" closeable="false" resizeable="false" activate="false">'..[[
+                <hslider minimum="0" maximum="100" on-change="speedChange_callback" id="1"/>
+            <label text="" style="* {margin-left: 300px;}"/>
+        </ui>
+        ]]
+    ui=simUI.create(xml)
+    speed=(minMaxSpeed[1]+minMaxSpeed[2])*0.5
+    simUI.setSliderValue(ui,1,100*(speed-minMaxSpeed[1])/(minMaxSpeed[2]-minMaxSpeed[1]))
+    
+end
+
+function sysCall_sensing()
+    local result,distData=sim.checkDistance(robotCollection,sim.handle_all)
+    if result>0 then
+        sim.addDrawingObjectItem(distanceSegment,nil)
+        sim.addDrawingObjectItem(distanceSegment,distData)
+        sim.setGraphStreamValue(graph,distStream,distData[7])
+    end
+    local p=sim.getObjectPosition(bubbleRobBase,-1)
+    sim.addDrawingObjectItem(robotTrace,p)
+end 
+
+function speedChange_callback(ui,id,newVal)
+    speed=minMaxSpeed[1]+(minMaxSpeed[2]-minMaxSpeed[1])*newVal/100
+end
+
+function sysCall_actuation() 
+    result=sim.readProximitySensor(noseSensor) -- Reads the main front proximity sensor
+    
+    -- If we detected something, we set the backward mode:
+    if (result>0) then backUntilTime=sim.getSimulationTime()+4 end 
+    
+    if (backUntilTime<sim.getSimulationTime()) then
+        -- When in forward mode, we simply move forward at the desired speed
+        sim.setJointTargetVelocity(leftMotor,speed)
+        sim.setJointTargetVelocity(rightMotor,speed)
+    else
+        -- When in backward mode, we simply backup in a curve at reduced speed
+        sim.setJointTargetVelocity(leftMotor,-speed/2)
+        sim.setJointTargetVelocity(rightMotor,-speed/8)
+    end
+    
+    -- THE FOLLOWING LINE OF CODE WAS WRITTEN BY ME.
+    local result2=sim.readProximitySensor(noseSensor2) -- Reads the back proximity sensor
+    
+    -- THE FOLLOWING BLOCK OF CODE WAS WRITTEN BY ME.
+    --If we hit something with the back sensor
+    if(result2>0) then
+        -- We move forward
+        sim.setJointTargetVelocity(leftMotor,speed/8)
+        sim.setJointTargetVelocity(rightMotor,speed/2)
+    end
+    
+    -- THE FOLLOWING BLOCK OF CODE WAS TAKEN FROM THE CODE SNIPPET IN THE COURSE RESOURCES.
+    -- This next line reads the human-sensing proximity sensor
+    local result_To_Detect,distance,detectedPoint,detectedObjectHandle=sim.readProximitySensor(noseSensor_To_Detect)
+    if (result_To_Detect>0) then    
+        if detectedObjectHandle then
+            if sim.getObjectAlias(detectedObjectHandle) == 'Human' then
+                num_To_Detect =  num_To_Detect + 1
+                print("I found a person!")
+                
+                -- simInt simGetObjectColor(simInt objectHandle,simInt index,simInt colorComponent,simFloat* rgbData)
+                -- Colors: Red: {1,0,0}, Green = {0,1,0}, Blue = {0,0,1}
+                sim.setObjectColor(noseSensor_To_Detect,0,sim.colorcomponent_ambient_diffuse,{0,1,0}) -- Green = {0,1,0}
+            end
+        end
+    else
+        sim.setObjectColor(noseSensor_To_Detect,0,sim.colorcomponent_ambient_diffuse,{1,0.9,0.71}) -- Pale Yellow = {1,0.9,0.71}
+    end
+    
+end
+
+function sysCall_cleanup() 
+    simUI.destroy(ui)
+end 
