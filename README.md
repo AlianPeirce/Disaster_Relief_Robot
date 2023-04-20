@@ -1,4 +1,21 @@
-# "Suri the Searcher" — A Disaster Relief Robot
+<h1 align="center">"Suri the Searcher" — A Disaster Relief Robot</h1>
+
+<p align="center">
+  <a href="#about">About</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="#disaster-environment">Disaster Environment</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="#improved-disaster-recovery">Improved Disaster Recovery</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="#architecture">Architecture</a>
+  <a href="#internal-representation-of-the-environment">Internal Representation of the Environment</a>
+  <br>
+  <a href="#reasoning-knowledge-representation-uncertainty-and-intelligence">Reasoning, Knowledge Representation, Uncertainty, and Intelligence</a>
+  <a href="#further-improvements">Further Improvements</a>
+  <br>
+  <a href="#robot-code-and-project-file">Robot Code and Project File</a>&nbsp;&nbsp;•&nbsp;&nbsp; 
+  <a href="#video-recording">Video Recording</a>
+  <a href="#sources">Sources</a>
+</p>
+
+## About
 “Suri the Searcher” is an autonomous robot designed to locate victims after a natural disaster. This robot was designed in CoppeliaSim (previously known as V-REP).
 
 ## Disaster Environment
