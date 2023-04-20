@@ -164,10 +164,12 @@ This search pattern forms a grid, thus resulting in an extremely thorough search
 is crucial in Suri’s case, as failing to detect a victim could potentially lead to disastrous
 consequences.
 
-## Robot Code
+## Robot Code and Project File
 
 I have included the child script whose icon sits next to the bubbleRob object (in the directory
 within CoppeliaSim); this code file governs Suri the Searcher's behavior. The name of the file is “bubbleRob_child_script.txt”. In the file, I have clearly marked (using comments) which code was written by me and which code came from the course resources; all other code originates from the BubbleRob tutorial.
+
+I have also included the project ZIP file itself; this can be imported into CoppeliaSim in order to view Suri the Searcher performing her duties autonomously at a natural disaster site.
 
 ## Video Recording
 
