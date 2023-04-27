@@ -15,6 +15,11 @@
   <a href="#sources">Sources</a>
 </p>
 
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/110432500/234924254-7f089508-5f69-46ae-8f26-4d711c42ba35.gif" alt="Demo of robot identifying a natural disaster victim" />
+</p>
+
+
 ## About
 “Suri the Searcher” is an autonomous robot designed to locate victims after a natural disaster. This robot was designed in CoppeliaSim (previously known as V-REP).
 
@@ -190,9 +195,9 @@ I have also included the project ZIP file itself; this can be imported into Copp
 
 ## Video Recording
 
-I recorded a Panopto video that describes and demonstrates my disaster recovery robot (Suri the Searcher). This video can be accessed using the following link:
+I recorded a video that describes and demonstrates my disaster recovery robot (Suri the Searcher). This video can be accessed using the following link:
 
-[Suri the Searcher Demonstration](https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=86863786-ebb7-4a08-924c-ae8f0069f23d) (WILL BE UNLOCKED SOON!)
+[Suri the Searcher Demonstration](https://www.youtube.com/watch?v=1TGIzCC_Dec)
 
 ## Sources
 
