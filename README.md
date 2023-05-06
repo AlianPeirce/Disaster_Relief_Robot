@@ -4,12 +4,12 @@
   <a href="#about">About</a>&nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="#disaster-environment">Disaster Environment</a>&nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="#improved-disaster-recovery">Improved Disaster Recovery</a>&nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="#architecture">Architecture</a>&nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="#internal-representation-of-the-environment">Internal Representation of the Environment</a>
+  <a href="#architecture">Architecture</a>
   <br>
-  <a href="#reasoning-knowledge-representation-uncertainty-and-intelligence">Reasoning, Knowledge Representation, Uncertainty, and Intelligence</a>&nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="#further-improvements">Further Improvements</a>
+  <a href="#internal-representation-of-the-environment">Internal Representation of the Environment</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="#reasoning-knowledge-representation-uncertainty-and-intelligence">Reasoning, Knowledge Representation, Uncertainty, and Intelligence</a>
   <br>
+  <a href="#further-improvements">Further Improvements</a>&nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="#robot-code-and-project-file">Robot Code and Project File</a>&nbsp;&nbsp;•&nbsp;&nbsp; 
   <a href="#video-recording">Video Recording</a>&nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="#sources">Sources</a>
